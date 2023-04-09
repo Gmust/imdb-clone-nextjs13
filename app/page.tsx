@@ -20,7 +20,7 @@ const Home = async ({ searchParams }: any) => {
         )}
       </section>
       <Paginator searchTerm={genre ? genre : 'now_playing'}
-                 page={page ? page : 1} totalPages={moviesResponse.data.total_pages} />
+                 page={page} totalPages={moviesResponse.data.total_pages} />
     </main>
   );
 };
