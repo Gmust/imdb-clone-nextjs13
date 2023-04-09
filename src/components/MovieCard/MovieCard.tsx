@@ -11,7 +11,7 @@ export const MovieCard = ({ title, vote_average, poster_path, release_date, vote
         <div className='object-cover relative rounded-lg bg-cover bg-gradient-to-r from-cyan-500 to-blue-500
                         w-52  h-48'>
           <Image src={`https://image.tmdb.org/t/p/original${poster_path}`} alt={`${title} poster`}
-                 fill priority />
+                 fill priority loading='eager' />
         </div>
         <div className='p-2'>
           <p className='line-clamp-2 text-lg'>{overview}</p>

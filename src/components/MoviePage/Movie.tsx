@@ -48,7 +48,7 @@ export const Movie = ({ movieDetail, similarMovies }: MovieProps) => {
           <div>
             <h1 className='text-5xl font-semibold'>{movieDetail.original_title || movieDetail.title}</h1>
           </div>
-          <p className='ml-3 opacity-80 dark:opacity-50'>- {movieDetail.tagline}</p>
+          {movieDetail.tagline && <p className='ml-3 opacity-80 dark:opacity-50'>- {movieDetail.tagline}</p>}
           <p className='text-lg mt-3 w-full sm:w-10/12'>{movieDetail.overview}</p>
           <span className='flex items-center text-xl'>
             <h2 className='font-bold mr-2'>Budget:</h2>{movieDetail.budget}<BiDollar />
