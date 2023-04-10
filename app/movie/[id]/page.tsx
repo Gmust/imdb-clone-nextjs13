@@ -1,6 +1,4 @@
 import { MoviesAPI } from '@/src/service/movies';
-import Image from 'next/image';
-import { CONSTANTS } from '@utils/constants';
 import { Movie } from '@components/MoviePage/Movie';
 
 interface MoviePageParams {
@@ -13,13 +11,15 @@ const MoviePage = async ({ params }: MoviePageParams) => {
 
   const movieDetailRes = await MoviesAPI.getMovieDetail(+params.id);
   const similarMoviesRes = await MoviesAPI.getSimilarMovies(+params.id);
+  const movieReviewsRes = await MoviesAPI.getMovieReview(+params.id);
+
 
   const movieDetail = movieDetailRes.data;
   const similarMovies = similarMoviesRes.data;
-
+  const movieReviews = movieReviewsRes.data
 
   return (
-    <Movie movieDetail={movieDetail}
+    <Movie movieDetail={movieDetail} movieReviews={movieReviews}
       // @ts-ignore
            similarMovies={similarMovies!.results} />
   );

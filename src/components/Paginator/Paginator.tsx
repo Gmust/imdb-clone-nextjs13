@@ -13,7 +13,6 @@ interface PaginatorParams {
 
 export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: PaginatorParams) => {
 
-
   const search = useSearchParams();
   const pageParams = search.get('page') || 1;
 
@@ -60,7 +59,6 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
   };
 
   const handleChangePage = (p: number) => {
-
     if (!searchTerm) {
       router.push(`/search/${searchTerm}`);
     } else {
@@ -68,25 +66,36 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
     }
   };
 
+  const handleSwitchPrevPage = () => {
+    if (currentPage <= 1) {
+      return;
+    } else {
+      if ((currentPage) % 20 == 1) {
+        setChunk(chunk - 1);
+      }
+      setCurrentPage(currentPage - 1);
+      handleChangePage(+page - 1);
+    }
+  };
+
+  const handleSwitchNextPage = () => {
+    if (currentPage > totalResults) {
+      return;
+    } else {
+      if (currentPage % 20 == 0) {
+        setChunk(chunk + 1);
+      }
+      setCurrentPage(+currentPage + 1);
+      handleChangePage(+page + 1);
+    }
+  };
 
   return (
     <div className='flex items-center justify-center space-x-3 mb-2'>
       {chunks.length > 0 && <AiOutlineDoubleLeft className='text-2xl text-fuchsia-500  cursor-pointer'
-                                                 onClick={() => {
-                                                   handleChangeChunk('prev');
-                                                 }} />}
+                                                 onClick={() => handleChangeChunk('prev')} />}
       <AiOutlineArrowLeft className='cursor-pointer text-blue-500 '
-                          onClick={() => {
-                            if (currentPage <= 1) {
-                              return;
-                            } else {
-                              if ((currentPage) % 20 == 1 && currentPage != 1) {
-                                setChunk(chunk - 1);
-                              }
-                              setCurrentPage(currentPage - 1);
-                              handleChangePage(+page - 1);
-                            }
-                          }} />
+                          onClick={() => handleSwitchPrevPage()} />
       {
         chunks.length > 0 ?
           chunks[chunk].map(p =>
@@ -112,22 +121,10 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
           )
       }
       <AiOutlineArrowRight className='cursor-pointer text-blue-500  '
-                           onClick={() => {
-                             setCurrentPage(+currentPage + 1);
-                             if (currentPage > totalResults) {
-                               return;
-                             } else {
-                               if (currentPage % 20 == 0) {
-                                 setChunk(chunk + 1);
-                               }
-                               handleChangePage(+page + 1);
-                             }
-                           }} />
+                           onClick={() => handleSwitchNextPage()} />
 
       {chunks.length > 0 && <AiOutlineDoubleRight className='text-2xl text-fuchsia-500 cursor-pointer'
-                                                  onClick={() => {
-                                                    handleChangeChunk('next');
-                                                  }} />}
+                                                  onClick={() => handleChangeChunk('next')} />}
     </div>
   );
 };

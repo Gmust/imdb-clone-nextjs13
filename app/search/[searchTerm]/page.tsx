@@ -6,6 +6,8 @@ const SearchPage = async ({ params }: any) => {
 
   const searchMoviesRes = await MoviesAPI.searchMovies(params.searchTerm.toString());
   const searchMovies = searchMoviesRes.data.results;
+
+
   console.log(searchMovies)
   return (
     <>

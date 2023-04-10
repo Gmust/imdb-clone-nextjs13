@@ -10,7 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-
+      colors: {
+        'slate-1000': '#0B111F'
+      }
     }
   },
   plugins: [

@@ -26,7 +26,6 @@ interface Movie {
   vote_count?: number;
 }
 
-
 interface Company {
   name: string;
   id: number;
@@ -53,8 +52,28 @@ type Category = {
   category: 'popular' | 'top_rated' | 'latest' | 'now_playing' | 'upcoming'
 }
 
+
+interface Review {
+  author?: string,
+  author_details?: AuthorDetails,
+  content?: string,
+  created_at: Date,
+  id?: string,
+  updated_at?: Date,
+  url?: URL
+}
+
+interface AuthorDetails {
+  name: string,
+  username: string,
+  avatar_path: string,
+  rating: number
+}
+
 interface Result<Data> {
   results: Array<Data>;
   page?: number;
   totalPages?: number;
 }
+
+

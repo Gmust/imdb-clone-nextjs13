@@ -6,16 +6,19 @@ import { RelatedFilmsBar } from '@components/MoviePage/RelatedFilmsBar';
 import { selectClassname } from '@utils/className/statusClassName';
 import { CONSTANTS } from '@utils/constants';
 import { CompanyCard } from '@components/MoviePage/CompanyCard';
+import { ReviewCard } from '@components/MoviePage/ReviewCard';
 
 interface MovieProps {
   movieDetail: Movie,
-  similarMovies: Movie[]
+  similarMovies: Movie[],
+  movieReviews: Result<Review>
 }
 
-export const Movie = ({ movieDetail, similarMovies }: MovieProps) => {
+export const Movie = ({ movieDetail, similarMovies, movieReviews }: MovieProps) => {
 
   const classname = selectClassname(movieDetail.status);
   const formatedRelatedMovies = similarMovies.slice(0, 4);
+
 
   return (
     <div className='sm:flex min-h-full px-4 py-8 sm:justify-between'>
@@ -67,6 +70,18 @@ export const Movie = ({ movieDetail, similarMovies }: MovieProps) => {
                 <CompanyCard key={company.id} {...company} />
               )}
             </div>
+
+            <div className='sm:flex sm:flex-col mt-3'>
+              <h3 className='text-2xl font-bold'>Reviews: </h3>
+
+              <div className='space-y-4'>
+                {movieReviews.results.map(review =>
+                  <ReviewCard key={review.id} {...review} />
+                )}
+              </div>
+
+            </div>
+
           </div>
 
         </div>

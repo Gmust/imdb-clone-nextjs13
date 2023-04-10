@@ -20,6 +20,8 @@ export const MoviesAPI = {
   },
   async searchMovies(searchTerm: string) {
     return await instance.get<Result<Movie>>(`/search/movie?query=${searchTerm}`);
+  },
+  async getMovieReview(id: number) {
+    return await instance.get<Result<Review>>(`/movie/${id}/reviews`);
   }
-
 };
