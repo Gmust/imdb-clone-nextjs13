@@ -19,7 +19,7 @@ const Home = async ({ searchParams }: any) => {
           <MovieCard {...result} key={result.id} />
         )}
       </section>
-      <Paginator searchTerm={genre ? genre : 'now_playing'}
+      <Paginator searchTerm={genre ? genre : 'now_playing'} totalResults={moviesResponse.data.total_results}
                  page={page} totalPages={moviesResponse.data.total_pages} />
     </main>
   );
