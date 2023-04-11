@@ -7,7 +7,7 @@ export const CompanyCard = (company: Company) => {
                                                  flex flex-col justify-between space-y-2  mt-3'>
       <h3>{company.name}</h3>
       <div className='bg-slate-200 dark:bg-amber-50 relative object-cover w-16 h-9 sm:w-36 sm:h-32 '>
-        <Image src={CONSTANTS.IMAGE_URL + company.logo_path} alt={'There is no logo'} fill />
+        <Image src={CONSTANTS.IMAGE_URL + company.logo_path} alt={'There is no logo'} fill sizes={undefined}/>
       </div>
       <div className='font-bold'>
         Country:

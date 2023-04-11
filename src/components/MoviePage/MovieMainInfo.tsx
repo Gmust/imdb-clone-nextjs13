@@ -3,7 +3,7 @@ import { CONSTANTS } from '@utils/constants';
 import { BiLike, BiStar } from 'react-icons/bi';
 import { selectClassname } from '@utils/className/statusClassName';
 
-export const MovieMainInfo = (movieDetail:Movie) => {
+export const MovieMainInfo = (movieDetail: Movie) => {
 
   const classname = selectClassname(movieDetail.status);
 
@@ -12,7 +12,7 @@ export const MovieMainInfo = (movieDetail:Movie) => {
       <div className={'relative h-[28rem] w-[18rem] sm:h-[33rem] sm:w-[20rem]  overflow-hidden object-cover'}>
         <Image src={`${CONSTANTS.IMAGE_URL}${movieDetail.poster_path || movieDetail.backdrop_path}`}
                alt={movieDetail.title!} className='rounded-lg w-auto h-auto'
-               fill={true} />
+               fill={true} sizes={undefined} />
       </div>
       <div className='flex justify-between  text-xl '>
         <span className='flex items-center'>{movieDetail.vote_count}<BiLike /></span>

@@ -10,7 +10,7 @@ export const RelatedFilmsBar = (movie: Movie) => {
       <div className='flex flex-col '>
         <div className='object-cover relative overflow-hidden w-36 h-24'>
           <Image src={`${CONSTANTS.IMAGE_URL}${movie.poster_path || movie.backdrop_path}`} alt={movie.title!}
-                 fill />
+                 fill sizes={undefined} />
         </div>
         <p className='text-lg line-clamp-1'>{movie.title}</p>
       </div>

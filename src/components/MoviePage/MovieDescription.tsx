@@ -1,7 +1,7 @@
 import { BiDollar } from 'react-icons/bi';
 import { GiFilmProjector } from 'react-icons/gi';
 import { CompanyCard } from '@components/MoviePage/CompanyCard';
-import { ReviewCard } from '@components/MoviePage/ReviewCard';
+import { Reviews } from '@components/MoviePage/Reviews/Reviews';
 
 interface MovieDescriptionProps {
   movieDetail: Movie,
@@ -37,10 +37,8 @@ export const MovieDescription = ({ movieDetail, movieReviews }: MovieDescription
         <div className='sm:flex sm:flex-col mt-3'>
           <h3 className='text-2xl font-bold'>Reviews: </h3>
 
-          <div className='space-y-4'>
-            {movieReviews.results.map(review =>
-              <ReviewCard key={review.id} {...review} />
-            )}
+          <div>
+            <Reviews {...movieReviews} />
           </div>
         </div>
       </div>

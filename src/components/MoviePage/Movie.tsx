@@ -1,12 +1,4 @@
-import Image from 'next/image';
-import { BiDollar } from 'react-icons/bi';
-import { BiLike, BiStar } from 'react-icons/bi';
-import { GiFilmProjector } from 'react-icons/gi';
 import { RelatedFilmsBar } from '@components/MoviePage/RelatedFilmsBar';
-import { selectClassname } from '@utils/className/statusClassName';
-import { CONSTANTS } from '@utils/constants';
-import { CompanyCard } from '@components/MoviePage/CompanyCard';
-import { ReviewCard } from '@components/MoviePage/ReviewCard';
 import { MovieDescription } from '@components/MoviePage/MovieDescription';
 import { MovieMainInfo } from '@components/MoviePage/MovieMainInfo';
 

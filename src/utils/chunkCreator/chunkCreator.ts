@@ -1,5 +1,5 @@
 
-export const chunkArray = (arr: number[], n: number) => {
+export const chunkArray = (arr: any[], n: number) => {
   let chunkLength = Math.max(arr.length / n, 1);
   let chunks = [];
   for (let i = 0; i < n; i++) {

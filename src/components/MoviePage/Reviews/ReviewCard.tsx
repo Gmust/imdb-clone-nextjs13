@@ -21,7 +21,6 @@ export const ReviewCard = ({ id, url, content, author_details, author, updated_a
     src = `${CONSTANTS.IMAGE_URL}/${author_details?.avatar_path}`;
   }
 
-  //  https://www.gravatar.com/avatar/23f2cd16e6fafdf013b30ccc22e2e4c8.jpg
   return (
     <div className='flex flex-col rounded-3xl bg-amber-50 dark:bg-slate-1000 p-4 w-5/6'>
 
@@ -29,7 +28,7 @@ export const ReviewCard = ({ id, url, content, author_details, author, updated_a
         <div className='space-x-4 flex'>
           <div className='relative object-cover w-24 h-24 drop-shadow-2xl'>
             <Image src={src} className='rounded-full' alt={'There is no avatar'}
-                   fill />
+                   fill sizes={undefined} />
           </div>
           <div className='font-bold'>
             {author}
