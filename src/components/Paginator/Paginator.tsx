@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
 import { chunkArray } from '@utils/chunkCreator/chunkCreator';
+import { checkIsMobile } from '@utils/mobile/checkIsMobile';
 
 interface PaginatorParams {
   searchTerm: Category | string,
@@ -18,7 +19,12 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
 
   const [chunk, setChunk] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(+pageParams);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMobile(checkIsMobile());
+  }, []);
 
   useEffect(() => {
     setChunk(0);
@@ -38,6 +44,7 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
   for (let i = 0; i < totalPages; i++) {
     pages.push(i + 1);
   }
+
 
   const chunks = chunkArray(pages, totalPages / 20);
 

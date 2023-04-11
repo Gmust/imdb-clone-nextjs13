@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    domains: ['www.gravatar.com', 'image.tmdb.org']
+    domains: ['www.gravatar.com', 'image.tmdb.org', 'secure.gravatar.com']
   },
   reactStrictMode: true
 };

@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { BiStar } from 'react-icons/bi';
-import { truncateString } from '@utils/truncateString';
+import { truncateString } from '@utils/strings/truncateString';
 import { CONSTANTS } from '@utils/constants';
 
 export const ReviewCard = ({ id, url, content, author_details, author, updated_at, created_at }: Review) => {
@@ -12,20 +12,20 @@ export const ReviewCard = ({ id, url, content, author_details, author, updated_a
 
   const [showFullReview, setShowFullReview] = useState<boolean>(false);
 
-  if (author_details?.avatar_path.includes('https')) {
-    console.log(author_details?.avatar_path);
-    src = author_details?.avatar_path;
+
+  if (author_details?.avatar_path?.includes('https')) {
+    src = author_details?.avatar_path.replace(/^[/]+/, '');
   } else if (author_details?.avatar_path === null) {
-    src = '../../assets/defaultAvatar.webp';
+    src = '/defaultAvatar.webp';
   } else {
     src = `${CONSTANTS.IMAGE_URL}/${author_details?.avatar_path}`;
   }
 
-
+  //  https://www.gravatar.com/avatar/23f2cd16e6fafdf013b30ccc22e2e4c8.jpg
   return (
     <div className='flex flex-col rounded-3xl bg-amber-50 dark:bg-slate-1000 p-4 w-5/6'>
 
-      <div className='flex text-2xl justify-between'>
+      <div className='flex-col sm:flex-none sm:flex text-2xl sm:justify-between'>
         <div className='space-x-4 flex'>
           <div className='relative object-cover w-24 h-24 drop-shadow-2xl'>
             <Image src={src} className='rounded-full' alt={'There is no avatar'}
@@ -52,16 +52,16 @@ export const ReviewCard = ({ id, url, content, author_details, author, updated_a
 
       <hr className='h-px my-3  border-0 bg-amber-500' />
 
-      <div className='text-xl divide-amber-500 flex'>
+      <div className='text-xl text-justify break-words  divide-amber-500'>
         {
           showFullReview ?
-            <div onClick={() => setShowFullReview(!showFullReview)}>
+            <p onClick={() => setShowFullReview(!showFullReview)}>
               {content}
-            </div>
+            </p>
             :
-            <div onClick={() => setShowFullReview(!showFullReview)}>
+            <p onClick={() => setShowFullReview(!showFullReview)}>
               {truncatedText}
-            </div>
+            </p>
         }
       </div>
 
