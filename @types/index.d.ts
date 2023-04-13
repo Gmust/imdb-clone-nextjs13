@@ -52,7 +52,6 @@ type Category = {
   category: 'popular' | 'top_rated' | 'latest' | 'now_playing' | 'upcoming'
 }
 
-
 interface Review {
   author?: string,
   author_details?: AuthorDetails,
@@ -76,4 +75,8 @@ interface Result<Data> {
   totalPages?: number;
 }
 
-
+interface GuestSession {
+  success: boolean,
+  guest_session_id: string,
+  expires_at: string
+}

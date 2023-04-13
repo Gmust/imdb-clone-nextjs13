@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .modalWrapper {
+        background-color: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: 0.5s;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .modalContent {
+        padding: 20px;
+        border-radius: 12px;
+        background-color: white;
+        transform: scale(0.5);
+        transition: 0.4s all;
+    }
+}
 
 
 html, body, div, span, applet, object, iframe,
@@ -17,41 +40,47 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block;
+    display: block;
 }
+
 body {
-  line-height: 1;
+    line-height: 1;
 }
+
 ol, ul {
-  list-style: none;
+    list-style: none;
 }
+
 blockquote, q {
-  quotes: none;
+    quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
-  content: none;
+    content: '';
+    content: none;
 }
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-html::-webkit-scrollbar{
-  display: none;
+html::-webkit-scrollbar {
+    display: none;
 }
 
- html{
-  scrollbar-width: none;
+html {
+    scrollbar-width: none;
 }

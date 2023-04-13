@@ -2,6 +2,7 @@ import { Navbar } from '@components/Navbar/Navbar';
 import { MovieCard } from '@components/MovieCard/MovieCard';
 import { MoviesAPI } from '@/src/service/movies';
 import { Paginator } from '@components/Paginator/Paginator';
+import { AuthAPI } from '@/src/service/auth';
 
 export const revalidate = 1000;
 

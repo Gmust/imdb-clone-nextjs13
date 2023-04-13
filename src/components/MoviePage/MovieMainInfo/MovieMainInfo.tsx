@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CONSTANTS } from '@utils/constants';
 import { BiLike, BiStar } from 'react-icons/bi';
 import { selectClassname } from '@utils/className/statusClassName';
+import { RateMovie } from '@components/MoviePage/MovieMainInfo/RateMovie';
 
 export const MovieMainInfo = (movieDetail: Movie) => {
 
@@ -15,8 +16,7 @@ export const MovieMainInfo = (movieDetail: Movie) => {
                fill={true} sizes={undefined} />
       </div>
       <div className='flex justify-between  text-xl '>
-        <span className='flex items-center'>{movieDetail.vote_count}<BiLike /></span>
-        <span className='flex items-center'>{movieDetail.vote_average}<BiStar /></span>
+        <RateMovie vote_count={movieDetail.vote_count} vote_average={movieDetail.vote_average} />
       </div>
       <div className='flex justify-around space-x-1 flex-wrap'>
         {movieDetail.genres?.map(genre =>

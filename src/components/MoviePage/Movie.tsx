@@ -1,6 +1,6 @@
 import { RelatedFilmsBar } from '@components/MoviePage/RelatedFilmsBar';
 import { MovieDescription } from '@components/MoviePage/MovieDescription';
-import { MovieMainInfo } from '@components/MoviePage/MovieMainInfo';
+import { MovieMainInfo } from '@components/MoviePage/MovieMainInfo/MovieMainInfo';
 
 interface MovieProps {
   movieDetail: Movie,

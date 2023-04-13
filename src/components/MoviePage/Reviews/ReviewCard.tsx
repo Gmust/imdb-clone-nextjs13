@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { BiStar } from 'react-icons/bi';
 import { truncateString } from '@utils/strings/truncateString';
 import { CONSTANTS } from '@utils/constants';
+import { AuthAPI } from '@/src/service/auth';
 
 export const ReviewCard = ({ id, url, content, author_details, author, updated_at, created_at }: Review) => {
+
+
 
   const truncatedText = truncateString(content!, 400);
   let src;
