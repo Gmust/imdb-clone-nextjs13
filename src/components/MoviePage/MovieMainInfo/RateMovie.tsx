@@ -7,6 +7,7 @@ import { AuthAPI } from '@/src/service/auth';
 import { Modal } from '@/assets/Modals';
 import { StarRating } from '@components/MoviePage/MovieMainInfo/StarRating';
 
+
 interface RateMovieProps {
   vote_count: Movie['vote_count'];
   vote_average: Movie['vote_average'];

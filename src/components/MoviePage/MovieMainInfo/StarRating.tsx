@@ -5,7 +5,7 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GiConfirmed } from 'react-icons/gi';
 import { FaHandPointRight } from 'react-icons/fa';
 import { MoviesAPI } from '@/src/service/movies';
-import { AuthContext, ViewContext } from '@/context';
+import { AuthContext, useSnackbar, ViewContext } from '@/context';
 
 interface StarRatingParams {
   movieId: number;
@@ -15,6 +15,7 @@ export const StarRating = ({ movieId }: StarRatingParams) => {
 
   const { token } = useContext(AuthContext);
   const { setShowModal } = useContext(ViewContext);
+  const addSnackbar = useSnackbar()
   const [rating, setRating] = useState<number>(1);
   const [hover, setHover] = useState<number>(1);
 
@@ -26,6 +27,11 @@ export const StarRating = ({ movieId }: StarRatingParams) => {
       type: token.type!
     });
     setShowModal(false);
+    addSnackbar({
+      key: "success",
+      text: "This is a success snackbar",
+      variant: "success",
+    })
   };
 
   return (
