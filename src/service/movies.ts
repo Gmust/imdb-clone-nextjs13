@@ -8,10 +8,10 @@ interface TopRatedReq {
 }
 
 interface RateMovieParams {
-  movie_id: string;
+  movie_id: number;
   value: number;
-  guest_session_id?: string;
-  session_id?: string;
+  session_id: string,
+  type: 'guest' | 'user'
 }
 
 export const MoviesAPI = {
@@ -31,10 +31,10 @@ export const MoviesAPI = {
   async getMovieReview(id: number) {
     return await instance.get<Result<Review>>(`/movie/${id}/reviews`);
   },
-  async rateMovie({ movie_id, guest_session_id, session_id, value }: RateMovieParams) {
-    guest_session_id ? await instance.post(`/movie/${movie_id}/rating?session_id=${session_id}`,
+  async rateMovie({ movie_id, session_id, value, type }: RateMovieParams) {
+    type === 'user' ? await instance.post(`/movie/${movie_id}/rating?session_id=${session_id}`,
         { value })
-      : await instance.post(`/movie/${movie_id}/rating?guest_session_id=${guest_session_id}`,
+      : await instance.post(`/movie/${movie_id}/rating?guest_session_id=${session_id}`,
         { value });
   }
 };

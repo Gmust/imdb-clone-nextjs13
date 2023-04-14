@@ -5,7 +5,7 @@ interface Movie {
   budget?: number;
   genres?: Genres[];
   homepage?: string | null;
-  id?: number;
+  id: number;
   imdb_id?: string | null;
   original_language?: string;
   original_title?: string;

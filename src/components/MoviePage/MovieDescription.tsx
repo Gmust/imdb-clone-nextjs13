@@ -34,13 +34,16 @@ export const MovieDescription = ({ movieDetail, movieReviews }: MovieDescription
           )}
         </div>
 
-        <div className='sm:flex sm:flex-col mt-3'>
-          <h3 className='text-2xl font-bold'>Reviews: </h3>
-
-          <div>
-            <Reviews {...movieReviews} />
+        {
+          movieReviews.results.length > 0 &&
+          <div className='sm:flex sm:flex-col mt-3'>
+            <h3 className='text-2xl font-bold'>Reviews: </h3>
+            <div>
+              <Reviews {...movieReviews} />
+            </div>
           </div>
-        </div>
+        }
+
       </div>
     </>
   );
