@@ -32,7 +32,7 @@ export const MoviesAPI = {
     return await instance.get<Result<Review>>(`/movie/${id}/reviews`);
   },
   async rateMovie({ movie_id, session_id, value, type }: RateMovieParams) {
-    type === 'user' ? await instance.post(`/movie/${movie_id}/rating?session_id=${session_id}`,
+    return type === 'user' ? await instance.post(`/movie/${movie_id}/rating?session_id=${session_id}`,
         { value })
       : await instance.post(`/movie/${movie_id}/rating?guest_session_id=${session_id}`,
         { value });

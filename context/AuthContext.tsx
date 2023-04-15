@@ -31,6 +31,10 @@ export const AuthProvider = ({ children }: any) => {
   const [isGuest, setIsGuest] = useState<boolean>(false);
   const [token, setToken] = useState<TokenType>({ type: null, id: '' });
 
+  useEffect(()=>{
+    console.log(token)
+  }, [token])
+
   useEffect(() => {
     const session_id = localStorage.getItem('session_id');
     const guest_session_id = localStorage.getItem('guest_session_id');
@@ -61,7 +65,7 @@ export const AuthProvider = ({ children }: any) => {
         setIsGuest(true);
       }
     }
-  }, []);
+  }, [isGuest, isAuth]);
 
   return (
     <AuthContext.Provider value={{

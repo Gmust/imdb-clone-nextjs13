@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BiLike, BiStar } from 'react-icons/bi';
-import { AuthContext, ViewContext } from '@/context';
+import { AuthContext, useSnackbar, ViewContext } from '@/context';
 import { AuthAPI } from '@/src/service/auth';
 import { Modal } from '@/assets/Modals';
 import { StarRating } from '@components/MoviePage/MovieMainInfo/StarRating';
@@ -19,12 +19,18 @@ export const RateMovie = ({ vote_count, vote_average, movieId }: RateMovieProps)
   const router = useRouter();
   const { isGuest, isAuth, setIsGuest } = useContext(AuthContext);
   const { showModal, setShowModal } = useContext(ViewContext);
+  const addSnackBar = useSnackbar();
 
 
   const handleLoginLikeGuest = async () => {
     try {
       const res = await AuthAPI.createGuestSession();
       setIsGuest(res.success);
+      addSnackBar({
+        key: 'success',
+        text: 'Successfully logged in like guest',
+        variant: 'success'
+      });
     } catch (e: any) {
       alert(e.message);
     }

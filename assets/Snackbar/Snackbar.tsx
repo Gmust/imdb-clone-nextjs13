@@ -1,9 +1,14 @@
-import { SnackBarType } from '@utils/reducers';
+import { IoMdClose } from 'react-icons/io';
+import React from 'react';
+import { IconType } from 'react-icons';
 
 
-type  SnackbarProps = Omit<SnackBarType, 'key'> & {
+type  SnackbarProps ={
   handleClose: () => void,
-  open: boolean
+  open: boolean,
+  text: React.ReactNode;
+  icon?: IconType;
+  variant: 'success' | 'error' | 'warning' | 'info'; // snackbar variant
 }
 
 export const Snackbar = ({ handleClose, variant, text, icon: Icon }: SnackbarProps) => {
@@ -15,10 +20,10 @@ export const Snackbar = ({ handleClose, variant, text, icon: Icon }: SnackbarPro
   };
 
 
+
   return (
     <div className='relative'>
-
-      <div className='fixed left-4 bottom-4 '>
+      <div className='fixed left-4 bottom-4 z-50 '>
         <div
           className={` ${variants[variant]} flex min-w-[300px] items-center truncate whitespace-nowrap rounded-lg py-3 px-3.5 sm:text-xl text-white shadow-md`}
         >
@@ -32,7 +37,7 @@ export const Snackbar = ({ handleClose, variant, text, icon: Icon }: SnackbarPro
             className='ml-auto bg-transparent !p-0 text-current underline'
             onClick={handleClose}
           >
-            Close
+            <IoMdClose />
           </button>
         </div>
       </div>

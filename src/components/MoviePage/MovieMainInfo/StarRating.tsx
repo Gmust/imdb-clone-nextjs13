@@ -15,23 +15,33 @@ export const StarRating = ({ movieId }: StarRatingParams) => {
 
   const { token } = useContext(AuthContext);
   const { setShowModal } = useContext(ViewContext);
-  const addSnackbar = useSnackbar()
+  const addSnackbar = useSnackbar();
   const [rating, setRating] = useState<number>(1);
   const [hover, setHover] = useState<number>(1);
 
   const handleSendRating = async () => {
-    rating && await MoviesAPI.rateMovie({
-      movie_id: movieId,
-      value: rating,
-      session_id: token.id,
-      type: token.type!
-    });
-    setShowModal(false);
-    addSnackbar({
-      key: "success",
-      text: "This is a success snackbar",
-      variant: "success",
-    })
+    try {
+      console.log(token.id);
+      const res = await MoviesAPI.rateMovie({
+        movie_id: movieId,
+        value: rating,
+        session_id: token.id,
+        type: token.type!
+      });
+      setShowModal(false);
+      console.log(res.data);
+      addSnackbar({
+        key: 'success',
+        text: res.data.status_message,
+        variant: 'success'
+      });
+    } catch (e: any) {
+      addSnackbar({
+        key: 'error',
+        text: e.response.data.status_message,
+        variant: 'error'
+      });
+    }
   };
 
   return (

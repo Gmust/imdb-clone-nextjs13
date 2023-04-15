@@ -2,7 +2,6 @@ import './globals.css';
 import { Header } from '@components/Header';
 import { Providers } from '@/app/Providers';
 import { SearchBox } from '@components/SearchBox/SearchBox';
-import { Modal } from '@/assets/Modals';
 
 export const metadata = {
   title: 'IMDb clone',
