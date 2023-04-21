@@ -8,7 +8,7 @@ type  SnackbarProps ={
   open: boolean,
   text: React.ReactNode;
   icon?: IconType;
-  variant: 'success' | 'error' | 'warning' | 'info'; // snackbar variant
+  variant: 'success' | 'error' | 'warning' | 'info';
 }
 
 export const Snackbar = ({ handleClose, variant, text, icon: Icon }: SnackbarProps) => {

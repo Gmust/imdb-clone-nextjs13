@@ -11,6 +11,4 @@ export const AuthAPI = {
     localStorage.setItem('guest_session_id', JSON.stringify(item));
     return res.data;
   }
-
-
 };

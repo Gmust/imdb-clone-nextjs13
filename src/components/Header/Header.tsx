@@ -4,6 +4,7 @@ import { FaImdb } from 'react-icons/fa';
 import { MenuItem } from '@components/Header/MenuItem';
 import { ROUTES } from '@utils/constants';
 import { ThemeSwitch } from '@components/Header/ThemeSwitch';
+import { Account } from '@components/Header/Account';
 
 export const Header = () => {
   return (
@@ -15,7 +16,7 @@ export const Header = () => {
 
       <div className='flex items-center space-x-5'>
 
-          <ThemeSwitch />
+        <ThemeSwitch />
 
         <Link href={ROUTES.HOME}>
           <h2 className='hidden sm:inline my-2 text-2xl select-none'>
@@ -24,6 +25,9 @@ export const Header = () => {
           </h2>
           <FaImdb className='text-4xl bg-amber-500 sm:hidden' />
         </Link>
+
+        <Account />
+
       </div>
 
     </div>
