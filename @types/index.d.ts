@@ -81,3 +81,28 @@ interface GuestSession {
   expires_at: string
 }
 
+interface LoginUserSession {
+  success: boolean,
+  expires_at: string,
+  request_token: string
+}
+
+interface LoginForm {
+  username: string,
+  password: string,
+  temporaryToken: string
+}
+
+interface User {
+  avatar?: {
+    gravatar: {
+      hash: string
+    }
+  },
+  id: number,
+  iso_639_1?: string,
+  iso_3166_1?: string,
+  name: string,
+  include_adult: boolean,
+  username: string
+}

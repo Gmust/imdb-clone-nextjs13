@@ -31,9 +31,8 @@ export const AuthProvider = ({ children }: any) => {
   const [isGuest, setIsGuest] = useState<boolean>(false);
   const [token, setToken] = useState<TokenType>({ type: null, id: '' });
 
-  useEffect(()=>{
-    console.log(token)
-  }, [token])
+  useEffect(() => {
+  }, [token]);
 
   useEffect(() => {
     const session_id = localStorage.getItem('session_id');
@@ -43,20 +42,20 @@ export const AuthProvider = ({ children }: any) => {
 
     if (session_id) {
       const item = JSON.parse(session_id);
-
       if (item.expiry < now.getTime()) {
         setIsAuth(false);
         localStorage.removeItem('session_id');
       } else {
+        if (localStorage.getItem('guest_session_id')) {
+          localStorage.removeItem('guest_session_id');
+        }
         setToken({ id: item.id, type: 'user' });
         setIsAuth(true);
       }
     }
 
     if (guest_session_id) {
-
       const item = JSON.parse(guest_session_id);
-
       if (item.expiry < now.getTime()) {
         setIsGuest(false);
         localStorage.removeItem('guest_session_id');
