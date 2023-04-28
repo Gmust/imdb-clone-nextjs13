@@ -41,15 +41,14 @@ export const AuthProvider = ({ children }: any) => {
     const now = new Date();
 
     if (session_id) {
-      const item = JSON.parse(session_id);
-      if (item.expiry < now.getTime()) {
+      if (!session_id && !guest_session_id) {
         setIsAuth(false);
         localStorage.removeItem('session_id');
       } else {
         if (localStorage.getItem('guest_session_id')) {
           localStorage.removeItem('guest_session_id');
         }
-        setToken({ id: item.id, type: 'user' });
+        setToken({ id: session_id, type: 'user' });
         setIsAuth(true);
       }
     }

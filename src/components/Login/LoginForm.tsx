@@ -1,15 +1,18 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { AuthAPI } from '@/src/service/auth';
 import { useSnackbar } from '@/context';
 import { useRouter } from 'next/navigation';
+import { UsersAPI } from '@/src/service/users';
+import axios from 'axios';
 
 
 export const LoginForm = () => {
 
   const callSnackbar = useSnackbar();
   const router = useRouter();
+
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,6 +23,7 @@ export const LoginForm = () => {
         password: (e.target as HTMLFormElement).password.value,
         temporaryToken: token!
       });
+      await UsersAPI.getAccountDetails(res.data.session_id);
       callSnackbar({
         text: 'Successfully logged in!',
         variant: 'success',
