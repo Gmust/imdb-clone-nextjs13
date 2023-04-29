@@ -36,5 +36,5 @@ export const MoviesAPI = {
         { value })
       : await instance.post(`/movie/${movie_id}/rating?guest_session_id=${session_id}`,
         { value });
-  }
+  },
 };

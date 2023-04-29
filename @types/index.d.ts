@@ -97,15 +97,45 @@ interface User {
   avatar?: {
     gravatar: {
       hash: string
+    },
+    tmdb?: {
+      avatar_path: string
     }
   },
-  tmdb?: {
-    avatar_path: string
-  }
   id: number,
   iso_639_1?: string,
   iso_3166_1?: string,
   name: string,
   include_adult: boolean,
   username: string
+}
+
+interface MarkAsFavParams {
+  accountId: string,
+  media_type: 'movie' | 'tv',
+  media_id: string,
+  favorite: boolean
+  session_id: string
+}
+
+interface MarkAsFavRes {
+  status_code: string,
+  status_message: string
+}
+
+interface FavMovies {
+  adult: boolean
+  backdrop_path: any
+  genre_ids: number[]
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  release_date: string
+  poster_path: any
+  popularity: number
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
 }

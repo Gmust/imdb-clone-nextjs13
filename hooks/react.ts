@@ -1,11 +1,13 @@
 import { AuthAPI } from '@/src/service/auth';
 import { useContext } from 'react';
-import { AuthContext, useSnackbar} from '@/context';
+import { AuthContext, useSnackbar } from '@/context';
+import { UsersAPI } from '@/src/service/users';
+import { UserContext } from '@/context/UserContext';
 
 
 export const useGuestLogin = () => {
 
-  const {  setIsGuest } = useContext(AuthContext);
+  const { setIsGuest } = useContext(AuthContext);
   const addSnackBar = useSnackbar();
 
   const handleLoginLikeGuest = async () => {
@@ -23,4 +25,19 @@ export const useGuestLogin = () => {
   };
 
   return handleLoginLikeGuest;
-}
+};
+
+
+export const useUserLogin = () => {
+
+  const { user, setUser } = useContext(UserContext);
+
+  const fetchAccount = async () => {
+    const session_id = localStorage.getItem('session_id');
+    const res = await UsersAPI.getAccountDetails(session_id!);
+    setUser(res);
+  };
+
+
+   return fetchAccount
+};
