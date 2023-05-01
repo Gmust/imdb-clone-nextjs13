@@ -5,7 +5,7 @@ interface Movie {
   budget?: number;
   genres?: Genres[];
   homepage?: string | null;
-  id: number;
+  id: string;
   imdb_id?: string | null;
   original_language?: string;
   original_title?: string;
@@ -102,7 +102,7 @@ interface User {
       avatar_path: string
     }
   },
-  id: number,
+  id: string,
   iso_639_1?: string,
   iso_3166_1?: string,
   name: string,

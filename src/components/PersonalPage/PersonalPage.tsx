@@ -10,18 +10,15 @@ import { useUserLogin } from '@/hooks/react';
 
 export const PersonalPage = () => {
 
-  const [favMovies, setFavMovies] = useState<FavMovies[]>([]);
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setFavMovies, favMovies } = useContext(UserContext);
   const login = useUserLogin();
 
   useEffect(() => {
     login();
   }, []);
-
   useEffect(() => {
     const fetchFavMovies = async () => {
-      console.log(user);
       const session_id = localStorage.getItem('session_id');
       const res = await UsersAPI.getFavoriteMovies(user.id, session_id!);
       // @ts-ignore

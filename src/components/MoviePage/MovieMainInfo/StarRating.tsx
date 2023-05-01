@@ -8,7 +8,7 @@ import { MoviesAPI } from '@/src/service/movies';
 import { AuthContext, useSnackbar, ViewContext } from '@/context';
 
 interface StarRatingParams {
-  movieId: number;
+  movieId: string;
 }
 
 export const StarRating = ({ movieId }: StarRatingParams) => {
@@ -23,7 +23,7 @@ export const StarRating = ({ movieId }: StarRatingParams) => {
     try {
       console.log(token.id);
       const res = await MoviesAPI.rateMovie({
-        movie_id: movieId,
+        movie_id: +movieId,
         value: rating,
         session_id: token.id,
         type: token.type!
