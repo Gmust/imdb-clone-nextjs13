@@ -3,7 +3,7 @@ import { PersonalPage } from '@components/PersonalPage/PersonalPage';
 const PersonalAreaPage = () => {
 
   return (
-    <div>
+    <div className=''>
       <PersonalPage/>
     </div>
   );

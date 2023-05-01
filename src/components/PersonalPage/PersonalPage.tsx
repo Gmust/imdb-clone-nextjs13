@@ -6,6 +6,8 @@ import { UserContext } from '@/context/UserContext';
 import Image from 'next/image';
 import { CONSTANTS } from '@utils/constants';
 import { useUserLogin } from '@/hooks/react';
+import { FavoriteMovies } from '@components/PersonalPage/FavoriteMovies';
+import { AccountInfo } from '@components/PersonalPage/AccountInfo';
 
 
 export const PersonalPage = () => {
@@ -28,30 +30,17 @@ export const PersonalPage = () => {
   }, [user]);
 
   return (
-    <div className='flex flex-col sm:flex-row  mt-2 sm:mt-5 space-x-4 sm: ml-16'>
-      <div>
-        <Image
-          src={user.avatar?.tmdb?.avatar_path ? CONSTANTS.IMAGE_URL + '/' + user.avatar?.tmdb?.avatar_path : '/defaultAvatar.webp'}
-          alt={''} width={200} height={200}
-          className='rounded-lg shadow-2xl shadow-amber-500/40' />
-      </div>
+    <div className='flex flex-col justify-center sm:flex-row sm:justify-normal  mt-2 sm:mt-5 sm:space-x-10 ml-4
+     sm:ml-16 '>
 
-      <div>
-        <ul>
-          <li className='flex items-center'>
-            <span className='text-xl mr-2'>Username:</span>
-            <h2 className='text-xl dark:text-amber-500'>{user.username}</h2>
-          </li>
-          <li className='flex items-center'>
-            <span className='text-xl mr-2'>Name:</span>
-            <h2 className='text-xl dark:text-amber-500'>{user.name}</h2>
-          </li>
-        </ul>
-      </div>
+      <>
+        <AccountInfo avatar={user.avatar?.tmdb?.avatar_path} username={user.username} name={user.name}/>
+      </>
 
 
-      <div>
-        {favMovies.map(movie => <div>{movie.title}</div>)}
+      <div className='flex flex-col'>
+        <span className='text-xl sm:text-2xl font-semibold'>Favorites:</span>
+        <FavoriteMovies favMovies={favMovies} />
       </div>
 
     </div>
