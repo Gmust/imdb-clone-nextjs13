@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { CONSTANTS } from '@utils/constants';
 import { selectClassname } from '@utils/className/statusClassName';
-import { RateMovie } from '@components/MoviePage/MovieMainInfo/RateMovie';
+import { MovieInteractions } from '@components/MoviePage/MovieMainInfo/MovieInteractions';
 
 export const MovieMainInfo = (movieDetail: Movie) => {
 
@@ -15,8 +15,8 @@ export const MovieMainInfo = (movieDetail: Movie) => {
                fill={true} sizes={undefined} />
       </div>
       <div className='flex justify-between  text-xl '>
-        <RateMovie movieId={movieDetail.id} vote_count={movieDetail.vote_count}
-                   vote_average={movieDetail.vote_average} />
+        <MovieInteractions movieId={movieDetail.id} vote_count={movieDetail.vote_count}
+                           vote_average={movieDetail.vote_average} />
       </div>
       <div className='flex justify-around space-x-1 flex-wrap'>
         {movieDetail.genres?.map(genre =>

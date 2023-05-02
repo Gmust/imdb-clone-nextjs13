@@ -17,5 +17,9 @@ export const UsersAPI = {
   async getFavoriteMovies(account_id: string | number, session_id: string) {
     const res = await instance.get<Result<FavMovies[]>>(`/account/${account_id}/favorite/movies?session_id=${session_id}`);
     return res.data;
+  },
+  async getRatedMovies(account_id: string | number, session_id: string) {
+    const res = await instance.get<Result<RatedMovies[]>>(`/account/${account_id}/rated/movies?session_id=${session_id}`);
+    return res.data;
   }
 };
