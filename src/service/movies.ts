@@ -37,4 +37,7 @@ export const MoviesAPI = {
       : await instance.post(`/movie/${movie_id}/rating?guest_session_id=${session_id}`,
         { value });
   },
+  async getLanguages() {
+    return await instance.get<ListLanguages[]>('/configuration/languages');
+  }
 };

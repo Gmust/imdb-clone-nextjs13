@@ -5,8 +5,6 @@ import { Snackbar } from '@/assets/Snackbar/Snackbar';
 import { Actions } from '@utils/constants/actions';
 
 interface ViewContextParams {
-  showModal: boolean,
-  setShowModal: Dispatch<SetStateAction<boolean>>,
   queue: SnackBarType[],
   dispatch: Dispatch<TAction>
 }
@@ -14,8 +12,6 @@ interface ViewContextParams {
 
 export const ViewContext = createContext<ViewContextParams>(
   {
-    showModal: false,
-    setShowModal: () => false,
     queue: [] as SnackBarType[],
     dispatch: () => {
     }
@@ -23,13 +19,10 @@ export const ViewContext = createContext<ViewContextParams>(
 
 export const ViewProvider = ({ children }: any) => {
 
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [{ queue }, dispatch] = useReducer(snackBarReducer, { queue: [] });
 
   return (
     <ViewContext.Provider value={{
-      showModal,
-      setShowModal,
       queue,
       dispatch
     }}>

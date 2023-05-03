@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GiConfirmed } from 'react-icons/gi';
 import { FaHandPointRight } from 'react-icons/fa';
@@ -9,12 +9,12 @@ import { AuthContext, useSnackbar, ViewContext } from '@/context';
 
 interface StarRatingParams {
   movieId: string;
+  setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
-export const StarRating = ({ movieId }: StarRatingParams) => {
+export const StarRating = ({ movieId, setShowModal }: StarRatingParams) => {
 
   const { token } = useContext(AuthContext);
-  const { setShowModal } = useContext(ViewContext);
   const addSnackbar = useSnackbar();
   const [rating, setRating] = useState<number>(1);
   const [hover, setHover] = useState<number>(1);

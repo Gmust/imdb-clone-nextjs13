@@ -124,36 +124,49 @@ interface MarkAsFavRes {
 }
 
 interface FavMovies {
-  adult: boolean
-  backdrop_path: any
-  genre_ids: number[]
-  id: number
-  original_language: string
-  original_title: string
-  overview: string
-  release_date: string
-  poster_path: any
-  popularity: number
-  title: string
-  video: boolean
-  vote_average: number
-  vote_count: number
+  adult: boolean;
+  backdrop_path: any;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  release_date: string;
+  poster_path: any;
+  popularity: number;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface RatedMovies {
-  adult: boolean
-  backdrop_path: any
-  genre_ids: number[]
-  id: string
-  original_language: string
-  original_title: string
-  overview: string
-  release_date: string
-  poster_path: any
-  popularity: number
-  title: string
-  video: boolean
-  vote_average: number
-  vote_count: number
-  rating: number
+  adult: boolean;
+  backdrop_path: any;
+  genre_ids: number[];
+  id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  release_date: string;
+  poster_path: any;
+  popularity: number;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  rating: number;
+}
+
+interface CreateListParams {
+  session_id: string,
+  name: string,
+  description?: string,
+  language?: string
+}
+
+interface ListLanguages {
+  iso_639_1: string,
+  english_name: string
+  name: string
 }

@@ -1,4 +1,5 @@
 import { instance } from '@/src/service/index';
+import { inflate } from 'zlib';
 
 export const UsersAPI = {
   async getAccountDetails(session_id: string) {
@@ -21,5 +22,16 @@ export const UsersAPI = {
   async getRatedMovies(account_id: string | number, session_id: string) {
     const res = await instance.get<Result<RatedMovies[]>>(`/account/${account_id}/rated/movies?session_id=${session_id}`);
     return res.data;
+  },
+  async checkListStatus(listId: string | number, movieId: number) {
+    const res = instance.get(`/list/${listId}/item_status?movie_id=${movieId}`);
+    return res;
+  },
+  async creatList({ session_id, name, language, description }: CreateListParams) {
+    const res = instance.post<{ status_message: string, success: boolean, status_code: number, list_id: number }>
+    (`/list?session_id=${session_id}`, { name, language, description });
+    console.log(res);
+    return res;
   }
+
 };

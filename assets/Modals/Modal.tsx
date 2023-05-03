@@ -1,10 +1,15 @@
 'use client';
-import { useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { ViewContext } from '@/context';
 
-export const Modal = ({ children }: any) => {
 
-  const { showModal, setShowModal } = useContext(ViewContext);
+type ModalInterface = {
+  children: React.ReactNode,
+  showModal: boolean,
+  setShowModal: (Dispatch<SetStateAction<boolean>>)
+}
+
+export const Modal = ({ children, setShowModal, showModal }: ModalInterface) => {
 
 
   return (

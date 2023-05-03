@@ -7,7 +7,7 @@ import { UsersAPI } from '@/src/service/users';
 import { UserContext } from '@/context/UserContext';
 import { RateMovie } from '@components/MoviePage/MovieMainInfo/MovieIteractions/RateMovie';
 import { AddToFavorite } from '@components/MoviePage/MovieMainInfo/MovieIteractions/AddToFavorite';
-import { InteractWithList } from '@components/MoviePage/MovieMainInfo/MovieIteractions/InteractWithList';
+import { InteractWithList } from '@components/MoviePage/MovieMainInfo/MovieIteractions/InteractWithList/InteractWithList';
 
 interface RateMovieProps {
   vote_count: Movie['vote_count'];

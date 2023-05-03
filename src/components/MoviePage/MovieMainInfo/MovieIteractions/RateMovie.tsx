@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { BiStar } from 'react-icons/bi';
 import { Modal } from '@/assets/Modals';
 import { AuthContext, useSnackbar, ViewContext } from '@/context';
@@ -15,9 +15,8 @@ interface RateMovieInterface {
 
 export const RateMovie = ({ movieId, vote_average }: RateMovieInterface) => {
 
-
+  const [showModal, setShowModal] = useState<boolean>(false);
   const { isGuest, isAuth, setIsGuest } = useContext(AuthContext);
-  const { setShowModal } = useContext(ViewContext);
   const addSnackbar = useSnackbar();
   const router = useRouter();
 
@@ -49,7 +48,7 @@ export const RateMovie = ({ movieId, vote_average }: RateMovieInterface) => {
         {vote_average}<BiStar />
       </span>
 
-      <Modal>
+      <Modal setShowModal={setShowModal} showModal={showModal}>
         {!isGuest && !isAuth ?
           <div className='text-xl text-black text-center'>
             <span>You need to be logged in to rate the film</span>
@@ -72,9 +71,7 @@ export const RateMovie = ({ movieId, vote_average }: RateMovieInterface) => {
             </div>
           </div>
           :
-          <div>
-            <StarRating movieId={movieId} />
-          </div>
+            <StarRating movieId={movieId} setShowModal={setShowModal} />
         }
       </Modal>
     </>
