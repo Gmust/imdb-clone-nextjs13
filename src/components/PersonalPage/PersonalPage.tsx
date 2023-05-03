@@ -7,12 +7,14 @@ import { useUserLogin } from '@/hooks/react';
 import { FavoriteMovies } from '@components/PersonalPage/FavoriteMovies';
 import { AccountInfo } from '@components/PersonalPage/AccountInfo';
 import { RatedMovies } from '@components/PersonalPage/RatedMovies';
+import { AuthContext } from '@/context';
 
 
 export const PersonalPage = () => {
 
 
-  const { user, setFavMovies, favMovies } = useContext(UserContext);
+  const { user, setFavMovies, favMovies, setLists, lists } = useContext(UserContext);
+  const { token } = useContext(AuthContext);
   const [ratedMovies, setRatedMovies] = useState<RatedMovies[] | null>(null);
   const login = useUserLogin();
 
@@ -24,10 +26,13 @@ export const PersonalPage = () => {
       const session_id = localStorage.getItem('session_id');
       const favMoviesRes = await UsersAPI.getFavoriteMovies(user.id, session_id!);
       const ratedMoviesRes = await UsersAPI.getRatedMovies(user.id, session_id!);
+      const listsRes = await UsersAPI.getCreatedLists(user.id, session_id!);
       // @ts-ignore
       setFavMovies(favMoviesRes.results);
       // @ts-ignore
       setRatedMovies(ratedMoviesRes.results);
+      // @ts-ignore
+      setLists(listsRes.data.results);
     };
     fetchData();
   }, [user]);
@@ -61,9 +66,14 @@ export const PersonalPage = () => {
               </div>
               : null
           }
-
-
         </>
+        <div>
+          {lists.map((list) =>
+            <div key={list.id} onClick={() => UsersAPI.deleteList(token.id, list.id)}>
+              {list.name}
+            </div>
+          )}
+        </div>
       </div>
 
     </div>

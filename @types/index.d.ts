@@ -161,12 +161,23 @@ interface RatedMovies {
 interface CreateListParams {
   session_id: string,
   name: string,
-  description?: string,
-  language?: string
+  description?: string | null,
+  language?: string | null
 }
 
 interface ListLanguages {
   iso_639_1: string,
   english_name: string
   name: string
+}
+
+interface List {
+  description: string
+  favorite_count: number
+  id: string
+  item_count: number
+  iso_639_1: string
+  list_type: string
+  name: string
+  poster_path: any
 }

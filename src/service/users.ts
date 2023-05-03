@@ -30,8 +30,12 @@ export const UsersAPI = {
   async creatList({ session_id, name, language, description }: CreateListParams) {
     const res = instance.post<{ status_message: string, success: boolean, status_code: number, list_id: number }>
     (`/list?session_id=${session_id}`, { name, language, description });
-    console.log(res);
     return res;
+  },
+  async getCreatedLists(account_id: string, session_id: string) {
+    return instance.get<Result<List[]>>(`/account/${account_id}/lists?session_id=${session_id}`);
+  },
+  async deleteList(session_id: string, list_id: string) {
+    return instance.delete(`/list/${list_id}?session_id=${session_id}`);
   }
-
 };
