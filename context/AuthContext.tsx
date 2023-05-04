@@ -13,6 +13,7 @@ interface AuthContextParams {
   token: TokenType,
   setIsAuth: Dispatch<SetStateAction<boolean>>
   setIsGuest: Dispatch<SetStateAction<boolean>>
+  setToken: Dispatch<SetStateAction<TokenType>>
 }
 
 
@@ -22,7 +23,8 @@ export const AuthContext = createContext<AuthContextParams>(
     isGuest: false,
     token: { type: null, id: '' },
     setIsAuth: () => false,
-    setIsGuest: () => false
+    setIsGuest: () => false,
+    setToken: () => {}
   });
 
 export const AuthProvider = ({ children }: any) => {
@@ -71,7 +73,8 @@ export const AuthProvider = ({ children }: any) => {
       isGuest,
       setIsAuth,
       setIsGuest,
-      token
+      token,
+      setToken
     }}>
       {children}
     </AuthContext.Provider>

@@ -9,11 +9,12 @@ import { CONSTANTS, ROUTES } from '@utils/constants';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { useUserLogin } from '@/hooks/react';
+import { UsersAPI } from '@/src/service/users';
 
 export const Account = () => {
 
   const { isAuth, isGuest, token } = useContext(AuthContext);
-  const { user } = useContext(UserContext);
+  const { user, setLists } = useContext(UserContext);
   const callSnackbar = useSnackbar();
   const router = useRouter();
   const login = useUserLogin();
@@ -21,11 +22,12 @@ export const Account = () => {
 
   useEffect(() => {
     if (isAuth && token) {
-      (async () => {
-        await login;
-      })();
+      login().then(async () => {
+        const res = await UsersAPI.getCreatedLists(user.id, token.id);
+        setLists(res.data.results);
+      });
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <div className='text-2xl cursor-pointer'>

@@ -31,11 +31,17 @@ export const useGuestLogin = () => {
 export const useUserLogin = () => {
 
   const { setUser } = useContext(UserContext);
+  const { setToken } = useContext(AuthContext);
 
   const fetchAccount = async () => {
-    const session_id = localStorage.getItem('session_id');
-    const res = await UsersAPI.getAccountDetails(session_id!);
-    setUser(res);
+    try {
+      const session_id = localStorage.getItem('session_id');
+      setToken({ id: session_id!, type: 'user' });
+      const res = await UsersAPI.getAccountDetails(session_id!);
+      setUser(res);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 

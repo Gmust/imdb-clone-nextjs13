@@ -8,6 +8,7 @@ import { FavoriteMovies } from '@components/PersonalPage/FavoriteMovies';
 import { AccountInfo } from '@components/PersonalPage/AccountInfo';
 import { RatedMovies } from '@components/PersonalPage/RatedMovies';
 import { AuthContext } from '@/context';
+import { MovieLists } from '@components/PersonalPage/MovieLists';
 
 
 export const PersonalPage = () => {
@@ -49,7 +50,7 @@ export const PersonalPage = () => {
       <div className='flex flex-col space-y-4 '>
         <>
           {
-            favMovies.length > 0 ?
+            favMovies.length >= 1 ?
               <div>
                 <span className='text-xl sm:text-2xl font-semibold'>Favorites:</span>
                 <FavoriteMovies favMovies={favMovies} />
@@ -59,7 +60,7 @@ export const PersonalPage = () => {
         </>
         <>
           {
-            favMovies.length >= 1 ?
+            ratedMovies?.length! >= 1 ?
               <div>
                 <span className='text-xl sm:text-2xl font-semibold'>Rated movies:</span>
                 <RatedMovies ratedMovies={ratedMovies} />
@@ -67,15 +68,17 @@ export const PersonalPage = () => {
               : null
           }
         </>
-        <div>
-          {lists.map((list) =>
-            <div key={list.id} onClick={() => UsersAPI.deleteList(token.id, list.id)}>
-              {list.name}
-            </div>
-          )}
-        </div>
+        <>
+          {
+            lists?.length >= 1 ?
+              <div>
+                <span className='text-xl sm:text-2xl font-semibold'>Movie lists:</span>
+                <MovieLists lists={lists} />
+              </div>
+              : null
+          }
+        </>
       </div>
-
     </div>
   );
 };

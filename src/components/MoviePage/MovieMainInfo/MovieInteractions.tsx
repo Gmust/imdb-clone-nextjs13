@@ -1,7 +1,6 @@
 'use client';
 import React, { useContext, useEffect } from 'react';
-import { BiLike, BiStar } from 'react-icons/bi';
-import { TiThList } from 'react-icons/ti';
+import { BiLike} from 'react-icons/bi';
 import { AuthContext, useSnackbar, ViewContext } from '@/context';
 import { UsersAPI } from '@/src/service/users';
 import { UserContext } from '@/context/UserContext';
@@ -51,7 +50,7 @@ export const MovieInteractions = ({ vote_count, vote_average, movieId }: RateMov
         {vote_count}<BiLike />
       </span>
       <AddToFavorite movieId={movieId} />
-      <InteractWithList />
+      <InteractWithList movieId={movieId} />
       <RateMovie vote_average={vote_average || 0} movieId={movieId} />
     </>
   );

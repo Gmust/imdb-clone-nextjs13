@@ -1,20 +1,23 @@
 'use client';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MdCreateNewFolder, MdFilterList, MdFilterListOff } from 'react-icons/md';
 import { VscNewFile } from 'react-icons/vsc';
-import { AiOutlineSelect } from 'react-icons/ai';
-import { AuthContext, useSnackbar, ViewContext } from '@/context';
-import { Modal } from '@/assets/Modals';
+import { AiOutlineCheck, AiOutlineSelect } from 'react-icons/ai';
+import { AuthContext, useSnackbar } from '@/context';
 import { MoviesAPI } from '@/src/service/movies';
 import { CreateListModal } from '@components/MoviePage/MovieMainInfo/MovieIteractions/InteractWithList/CreateListModal';
+import { UserContext } from '@/context/UserContext';
+import { UsersAPI } from '@/src/service/users';
 
-export const InteractWithList = ({}) => {
+export const InteractWithList = ({ movieId }: { movieId: string | number }) => {
 
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [hover, setHover] = useState<boolean>(false);
     const [languages, setLanguages] = useState<ListLanguages[]>();
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const { isAuth, token } = useContext(AuthContext);
+    const { lists, currentList, setCurrentList } = useContext(UserContext);
     const addSnackbar = useSnackbar();
 
     const handleCreateList = () => {
@@ -29,6 +32,38 @@ export const InteractWithList = ({}) => {
         });
       }
     };
+
+    const handleAddToList = async () => {
+      if (!isAuth) {
+        return addSnackbar({
+          key: 'error',
+          variant: 'error',
+          text: 'You need to be logged in!'
+        });
+      } else if (!currentList) {
+        return addSnackbar({
+          key: 'info',
+          variant: 'info',
+          text: 'Select list!'
+        });
+      } else {
+        try {
+          const res = await UsersAPI.addToList(currentList.id, token.id, +movieId);
+          addSnackbar({
+            key: 'success',
+            variant: 'success',
+            text: res.data.status_message
+          });
+        } catch (e: any) {
+          addSnackbar({
+            key: 'error',
+            variant: 'error',
+            text: e.response.data.status_message
+          });
+        }
+      }
+    };
+
 
     return (
       <>
@@ -46,19 +81,32 @@ export const InteractWithList = ({}) => {
                 Create list <MdCreateNewFolder className='ml-2' onClick={handleCreateList} />
               </li>
               <li className='flex text-xl  cursor-alias items-center hover:bg-amber-200  dark:hover:bg-slate-1000'>
-                Add to list <VscNewFile className='ml-2' />
+                Add to list <VscNewFile className='ml-2' onClick={handleAddToList} />
               </li>
-              <li className='flex text-xl cursor-alias  items-center hover:bg-amber-200 dark:hover:bg-slate-1000'>
+              <li className='flex text-xl cursor-alias  items-center hover:bg-amber-200 dark:hover:bg-slate-1000 relative'
+                  onMouseEnter={() => setHover(true)}>
                 Select list <AiOutlineSelect className='ml-2' />
+                <ul onMouseLeave={() => setHover(false)}
+                    className={`absolute z-10  ${hover ? '' : 'hidden'} bg-white rounded-lg w-32 dark:bg-gray-700 absolute
+                                sm:ml-32 `}>
+                  {lists.map((list) =>
+                    <li
+                      className='flex text-xl  cursor-alias items-center hover:bg-amber-200  dark:hover:bg-slate-1000 '
+                      key={list.id}>
+                      <span className='line-clamp-1 w-24' onClick={() => setCurrentList(list)}>{list.name}</span>
+                      {currentList?.id === list.id ?
+                        <AiOutlineCheck /> : null}
+                    </li>
+                  )}
+                </ul>
               </li>
             </ul>
           </div>
         </div>
 
-       <CreateListModal showModal={showModal} setShowModal={setShowModal} languages={languages!} />
+        <CreateListModal showModal={showModal} setShowModal={setShowModal} languages={languages!} />
       </>
     );
   }
 ;
 
-//block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white

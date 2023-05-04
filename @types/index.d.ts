@@ -172,12 +172,43 @@ interface ListLanguages {
 }
 
 interface List {
-  description: string
-  favorite_count: number
-  id: string
-  item_count: number
-  iso_639_1: string
-  list_type: string
-  name: string
-  poster_path: any
+  description: string;
+  favorite_count: number;
+  id: string;
+  item_count: number;
+  iso_639_1: string;
+  list_type: string;
+  name: string;
+  poster_path: any;
+}
+
+
+interface ListDetails {
+  created_by: string;
+  description: string;
+  favorite_count: number;
+  id: string;
+  items: ListItem[];
+  item_count: number;
+  iso_639_1: string;
+  name: string;
+  poster_path: string;
+}
+
+interface ListItem {
+  poster_path: string;
+  adult: boolean;
+  overview: string;
+  release_date: string;
+  original_title: string;
+  genre_ids: number[];
+  id: string;
+  media_type: string;
+  original_language: string;
+  title: string;
+  backdrop_path: any;
+  popularity: number;
+  vote_count: number;
+  video: boolean;
+  vote_average: number;
 }

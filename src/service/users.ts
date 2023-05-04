@@ -24,18 +24,33 @@ export const UsersAPI = {
     return res.data;
   },
   async checkListStatus(listId: string | number, movieId: number) {
-    const res = instance.get(`/list/${listId}/item_status?movie_id=${movieId}`);
+    const res = await instance.get(`/list/${listId}/item_status?movie_id=${movieId}`);
     return res;
   },
   async creatList({ session_id, name, language, description }: CreateListParams) {
-    const res = instance.post<{ status_message: string, success: boolean, status_code: number, list_id: number }>
+    const res = await instance.post<{ status_message: string, success: boolean, status_code: number, list_id: number }>
     (`/list?session_id=${session_id}`, { name, language, description });
     return res;
   },
   async getCreatedLists(account_id: string, session_id: string) {
-    return instance.get<Result<List[]>>(`/account/${account_id}/lists?session_id=${session_id}`);
+    return await instance.get<Result<List>>(`/account/${account_id}/lists?session_id=${session_id}`);
+  },
+  async getListDetails(list_id: string | number) {
+    return await instance.get<ListDetails>(`/list/${list_id}`);
   },
   async deleteList(session_id: string, list_id: string) {
-    return instance.delete(`/list/${list_id}?session_id=${session_id}`);
+    return await instance.delete(`/list/${list_id}?session_id=${session_id}`);
+  },
+  async clearList(list_id: number, session_id: string, confirm: boolean) {
+    return await instance.post<{ status_code: number, status_message: string }>
+    (`/list/${list_id}/clear?session_id=${session_id}&confirm=${confirm}`);
+  },
+  async addToList(list_id: string | number, session_id: string, media_id: number) {
+    return await instance.post<{ status_code: number, status_message: string }>
+    (`/list/${list_id}/add_item?session_id=${session_id}`, { media_id });
+  },
+  async deleteFromList(list_id: number, session_id: string, media_id: number) {
+    return await instance.post<{ status_code: number, status_message: string }>
+    (`/list/${list_id}/remove_item?session_id=${session_id}`, { media_id });
   }
 };
