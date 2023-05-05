@@ -22,13 +22,15 @@ export const MovieInteractions = ({ vote_count, vote_average, movieId }: RateMov
 
 
   useEffect(() => {
-    const fetchFavMovies = async () => {
-      const session_id = localStorage.getItem('session_id');
-      const res = await UsersAPI.getFavoriteMovies(user.id, session_id!);
-      // @ts-ignore
-      setFavMovies(res.results);
-    };
-    fetchFavMovies();
+    if(isAuth) {
+      const fetchFavMovies = async () => {
+        const session_id = localStorage.getItem('session_id');
+        const res = await UsersAPI.getFavoriteMovies(user.id, session_id!);
+        // @ts-ignore
+        setFavMovies(res.results);
+      };
+      fetchFavMovies();
+    }
   }, []);
 
 

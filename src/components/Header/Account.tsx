@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ImUser } from 'react-icons/im';
+import { FiLogOut } from 'react-icons/fi';
 import { AuthContext, useSnackbar } from '@/context';
 import { CONSTANTS, ROUTES } from '@utils/constants';
 import { UserContext } from '@/context/UserContext';
@@ -13,7 +14,7 @@ import { UsersAPI } from '@/src/service/users';
 
 export const Account = () => {
 
-  const { isAuth, isGuest, token } = useContext(AuthContext);
+  const { isAuth, isGuest, token, setIsGuest, setToken } = useContext(AuthContext);
   const { user, setLists } = useContext(UserContext);
   const callSnackbar = useSnackbar();
   const router = useRouter();
@@ -43,11 +44,27 @@ export const Account = () => {
                    src={user.avatar?.tmdb?.avatar_path ? CONSTANTS.IMAGE_URL + '/' + user.avatar?.tmdb?.avatar_path : '/defaultAvatar.webp'}
                    alt={''} width={50} height={50} />
           }
-          {isGuest && <ImUser onClick={() => callSnackbar({
-            text: 'To access personal area you need to be logged in like user',
-            variant: 'info',
-            key: 'info'
-          })} />}
+          {isGuest &&
+            <div className='flex space-x-3'>
+              <ImUser onClick={() => callSnackbar({
+                text: 'To access personal area you need to be logged in like user',
+                variant: 'info',
+                key: 'info'
+              })} />
+              <FiLogOut onClick={(e) => {
+                e.stopPropagation();
+                setIsGuest(false);
+                localStorage.removeItem('guest_session_id');
+                setToken({ id: '', type: null });
+                router.refresh();
+                callSnackbar({
+                  text: 'Logged out from user account',
+                  variant: 'success',
+                  key: 'success'
+                });
+              }} />
+            </div>
+          }
         </div>
       }
     </div>

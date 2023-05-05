@@ -59,10 +59,13 @@ export const AddToFavorite = ({ movieId }: AddToFavoriteProps) => {
   return (
     <span
       className='border-2 border-solid border-amber-500 rounded-full items-center p-1 cursor-pointer hover:scale-110'>
-        {filterIsFavorite({ favMovies, movieId }) ?
+      {isAuth ? filterIsFavorite({ favMovies, movieId }) ?
           <HiHeart className='text-fuchsia-600' onClick={handleMakeAsFavorite} /> :
-          <HiOutlineHeart onClick={handleMakeAsFavorite} />}
-      </span>
+          <HiOutlineHeart onClick={handleMakeAsFavorite} />
+        :
+        <HiOutlineHeart onClick={handleMakeAsFavorite} />
+      }
+    </span>
   );
 };
 
