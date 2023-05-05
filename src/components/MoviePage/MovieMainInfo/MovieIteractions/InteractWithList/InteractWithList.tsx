@@ -28,7 +28,7 @@ export const InteractWithList = ({ movieId }: { movieId: string | number }) => {
         addSnackbar({
           variant: 'info',
           key: 'info',
-          message: 'You need to be logged in to create movie list! '
+          text: 'You need to be logged in to create movie list! '
         });
       }
     };

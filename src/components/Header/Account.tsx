@@ -26,6 +26,7 @@ export const Account = () => {
       login().then(async () => {
         const res = await UsersAPI.getCreatedLists(user.id, token.id);
         setLists(res.data.results);
+        router.refresh();
       });
     }
   }, [isAuth]);
