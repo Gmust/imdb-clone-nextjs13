@@ -19,12 +19,7 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
 
   const [chunk, setChunk] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(+pageParams);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const router = useRouter();
-
-  useEffect(() => {
-    setIsMobile(checkIsMobile());
-  }, []);
 
   useEffect(() => {
     setChunk(0);
@@ -98,8 +93,8 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
   };
 
   return (
-    <div className='flex items-center justify-center space-x-3 mb-2'>
-      {chunks.length > 0 && <AiOutlineDoubleLeft className='text-2xl text-fuchsia-500  cursor-pointer'
+    <div className='flex items-center justify-center space-x-0.5 sm:space-x-3 mb-2'>
+      {chunks.length > 0 && <AiOutlineDoubleLeft className='sm:text-2xl text-fuchsia-500  cursor-pointer'
                                                  onClick={() => handleChangeChunk('prev')} />}
       <AiOutlineArrowLeft className='cursor-pointer text-blue-500 '
                           onClick={() => handleSwitchPrevPage()} />
@@ -107,7 +102,7 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
         chunks.length > 0 ?
           chunks[chunk].map(p =>
             <div key={p}
-                 className={`text-xl cursor-pointer select-none ${p === currentPage ? 'text-amber-500' : 'text-white'}`}
+                 className={`text-sm sm:text-xl cursor-pointer select-none ${p === currentPage ? 'text-amber-500' : 'dark:text-white text-slate-600'}`}
                  onClick={() => {
                    setCurrentPage(p);
                    handleChangePage(p);
@@ -118,7 +113,7 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
           :
           pages.map(p =>
             <div key={p}
-                 className={`text-xl cursor-pointer select-none ${p === currentPage ? 'text-amber-500' : 'text-white'}`}
+                 className={`text-xl cursor-pointer select-none ${p === currentPage ? 'text-amber-500' : 'dark:text-white text-slate-600'}`}
                  onClick={() => {
                    setCurrentPage(p);
                    handleChangePage(p);
@@ -130,7 +125,7 @@ export const Paginator = ({ searchTerm, page = 1, totalPages, totalResults }: Pa
       <AiOutlineArrowRight className='cursor-pointer text-blue-500  '
                            onClick={() => handleSwitchNextPage()} />
 
-      {chunks.length > 0 && <AiOutlineDoubleRight className='text-2xl text-fuchsia-500 cursor-pointer'
+      {chunks.length > 0 && <AiOutlineDoubleRight className='sm:text-2xl text-fuchsia-500 cursor-pointer'
                                                   onClick={() => handleChangeChunk('next')} />}
     </div>
   );

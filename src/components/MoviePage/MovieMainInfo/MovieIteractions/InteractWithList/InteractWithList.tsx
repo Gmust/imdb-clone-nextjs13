@@ -35,17 +35,19 @@ export const InteractWithList = ({ movieId }: { movieId: string | number }) => {
 
     const handleAddToList = async () => {
       if (!isAuth) {
-        return addSnackbar({
+        addSnackbar({
           key: 'error',
           variant: 'error',
           text: 'You need to be logged in!'
         });
-      } else if (!currentList) {
-        return addSnackbar({
+        return;
+      } else if (!currentList.id) {
+        addSnackbar({
           key: 'info',
           variant: 'info',
           text: 'Select list!'
         });
+        return;
       } else {
         try {
           const res = await UsersAPI.addToList(currentList.id, token.id, +movieId);

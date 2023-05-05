@@ -7,17 +7,20 @@ import { useUserLogin } from '@/hooks/react';
 import { FavoriteMovies } from '@components/PersonalPage/FavoriteMovies';
 import { AccountInfo } from '@components/PersonalPage/AccountInfo';
 import { RatedMovies } from '@components/PersonalPage/RatedMovies';
-import { AuthContext } from '@/context';
+import { AuthContext, useSnackbar } from '@/context';
 import { MovieLists } from '@components/PersonalPage/MovieLists';
+import { useRouter } from 'next/navigation';
 
 
 export const PersonalPage = () => {
 
 
-  const { user, setFavMovies, favMovies, setLists, lists } = useContext(UserContext);
-  const { token } = useContext(AuthContext);
+  const { user, setFavMovies, favMovies, setLists, setUser, setCurrentList, lists } = useContext(UserContext);
+  const { token, setIsAuth, setToken } = useContext(AuthContext);
   const [ratedMovies, setRatedMovies] = useState<RatedMovies[] | null>(null);
   const login = useUserLogin();
+  const router = useRouter();
+  const addSnackbar = useSnackbar();
 
   useEffect(() => {
     login();
@@ -38,12 +41,30 @@ export const PersonalPage = () => {
     fetchData();
   }, [user]);
 
+  const handleQuitUser = () => {
+    localStorage.removeItem('session_id');
+    setIsAuth(false);
+    setToken({ id: '', type: null });
+    setUser({} as User);
+    setCurrentList({} as List);
+    setRatedMovies([]);
+    setLists([]);
+    router.refresh();
+    router.push('/');
+    addSnackbar({
+      text: 'Successfully logged out',
+      variant: 'success',
+      key: 'success'
+    });
+  };
+
   return (
     <div className='flex flex-col justify-center sm:flex-row sm:justify-normal  mt-2 sm:mt-5 sm:space-x-10 ml-4
      sm:ml-16 '>
 
       <>
-        <AccountInfo avatar={user.avatar?.tmdb?.avatar_path} username={user.username} name={user.name} />
+        <AccountInfo avatar={user.avatar?.tmdb?.avatar_path} username={user.username} name={user.name}
+                     handleQuit={handleQuitUser} />
       </>
 
 

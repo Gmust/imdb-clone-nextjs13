@@ -9,7 +9,8 @@ export const MovieMainInfo = (movieDetail: Movie) => {
 
   return (
     <>
-      <div className={'relative h-[28rem] w-[18rem] sm:h-[33rem] sm:w-[20rem]  overflow-hidden object-cover'}>
+      <div className='relative h-[28rem]  sm:h-[33rem] sm:w-[20rem] overflow-hidden object-cover
+                     w-full'>
         <Image src={`${CONSTANTS.IMAGE_URL}${movieDetail.poster_path || movieDetail.backdrop_path}`}
                alt={movieDetail.title!} className='rounded-lg w-auto h-auto'
                fill={true} sizes={undefined} />

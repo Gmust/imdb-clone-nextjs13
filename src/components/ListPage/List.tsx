@@ -52,7 +52,7 @@ export const List = (list: ListDetails) => {
   return (
     <>
       <div className='flex flex-col mt-5'>
-        <div className='text-xl flex justify-around'>
+        <div className='text-xl flex flex-col  items-center sm:flex sm:flex-none sm:justify-around'>
           <div>
             <h2><span className='text-amber-500'>Name:</span> {list.name}</h2>
             <p><span className='text-amber-500'>Description:</span> {list.description}</p>

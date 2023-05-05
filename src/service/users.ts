@@ -1,5 +1,5 @@
 import { instance } from '@/src/service/index';
-import { inflate } from 'zlib';
+
 
 export const UsersAPI = {
   async getAccountDetails(session_id: string) {

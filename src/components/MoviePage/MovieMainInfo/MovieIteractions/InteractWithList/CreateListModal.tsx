@@ -3,6 +3,7 @@ import { Modal } from '@/assets/Modals';
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { UsersAPI } from '@/src/service/users';
 import { AuthContext, useSnackbar } from '@/context';
+import { UserContext } from '@/context/UserContext';
 
 
 interface CreateListModal {
@@ -18,19 +19,30 @@ export const CreateListModal = ({ showModal, setShowModal, languages }: CreateLi
   const [lang, setLang] = useState<string | null>(null);
   const addSnackbar = useSnackbar();
   const { token } = useContext(AuthContext);
-
+  const { user, setLists } = useContext(UserContext);
 
   const handleCreateList = async () => {
     if (name?.length! > 0 && name != null) {
-      const res = await UsersAPI.creatList(
-        { name, description, session_id: token.id, language: lang }
-      );
-      addSnackbar({
-        key: 'success',
-        variant: 'success',
-        text: res.data.status_message
-      });
-      setShowModal(false);
+      try {
+        const res = await UsersAPI.creatList(
+          { name, description, session_id: token.id, language: lang }
+        );
+        const lists = await UsersAPI.getCreatedLists(user.id, token.id);
+        setLists(lists.data.results);
+        addSnackbar({
+          key: 'success',
+          variant: 'success',
+          text: res.data.status_message
+        });
+        setShowModal(false);
+      } catch (e: any) {
+        console.log(e);
+        addSnackbar({
+          key: 'error',
+          variant: 'error',
+          text: e.response.data.errors[0]
+        });
+      }
     } else {
       addSnackbar({
         key: 'error',

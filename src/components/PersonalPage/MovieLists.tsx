@@ -10,7 +10,7 @@ export const MovieLists = ({ lists }: MovieListsProps) => {
       {lists.map(list =>
         <Link href={`/personal-area/list/${list.id}`}>
           <div
-            className='border-2 border-solid border-white flex flex-col rounded-lg p-2 cursor-pointer hover:scale-110
+            className='border-2 border-solid dark:border-white border-slate-500 flex flex-col rounded-lg p-2 cursor-pointer hover:scale-110
              transition duration-200 w-64'>
             <span className='text-lg flex space-x-1'>
               <label className='text-amber-500'>Name: </label>
