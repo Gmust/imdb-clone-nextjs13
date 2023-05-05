@@ -1,18 +1,17 @@
 'use client';
 
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useContext, useEffect } from 'react';
 import { AuthAPI } from '@/src/service/auth';
-import { useSnackbar } from '@/context';
+import { AuthContext, useSnackbar } from '@/context';
 import { useRouter } from 'next/navigation';
 import { UsersAPI } from '@/src/service/users';
-import axios from 'axios';
 
 
 export const LoginForm = () => {
 
   const callSnackbar = useSnackbar();
   const router = useRouter();
-
+  const { setIsAuth } = useContext(AuthContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,6 +28,7 @@ export const LoginForm = () => {
         variant: 'success',
         key: res?.status
       });
+      setIsAuth(true);
       router.push('/personal-area');
       router.refresh();
     } catch (e: any) {

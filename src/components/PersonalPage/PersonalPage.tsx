@@ -42,6 +42,7 @@ export const PersonalPage = () => {
   }, [user]);
 
   const handleQuitUser = () => {
+    router.push('/');
     localStorage.removeItem('session_id');
     setIsAuth(false);
     setToken({ id: '', type: null });
@@ -50,7 +51,6 @@ export const PersonalPage = () => {
     setRatedMovies([]);
     setLists([]);
     router.refresh();
-    router.push('/');
     addSnackbar({
       text: 'Successfully logged out',
       variant: 'success',

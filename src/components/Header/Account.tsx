@@ -14,7 +14,7 @@ import { UsersAPI } from '@/src/service/users';
 
 export const Account = () => {
 
-  const { isAuth, isGuest, token, setIsGuest, setToken } = useContext(AuthContext);
+  const { isAuth, isGuest, token, setIsGuest, setIsAuth, setToken } = useContext(AuthContext);
   const { user, setLists } = useContext(UserContext);
   const callSnackbar = useSnackbar();
   const router = useRouter();
@@ -26,10 +26,13 @@ export const Account = () => {
       login().then(async () => {
         const res = await UsersAPI.getCreatedLists(user.id, token.id);
         setLists(res.data.results);
-        router.refresh();
       });
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    console.log(isAuth);
+  }, []);
 
   return (
     <div className='text-2xl cursor-pointer'>
