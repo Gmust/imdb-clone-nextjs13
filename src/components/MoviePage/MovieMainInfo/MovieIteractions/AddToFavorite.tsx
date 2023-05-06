@@ -2,7 +2,7 @@
 
 import { filterIsFavorite } from '@utils/filters/filterIsFavorite';
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
-import React, { useContext, useTransition } from 'react';
+import React, { useContext, useEffect, useState, useTransition } from 'react';
 import { UsersAPI } from '@/src/service/users';
 import { AuthContext, useSnackbar } from '@/context';
 import { UserContext } from '@/context/UserContext';
@@ -15,11 +15,14 @@ interface AddToFavoriteProps {
 
 export const AddToFavorite = ({ movieId }: AddToFavoriteProps) => {
 
-  const router = useRouter();
   const { isAuth } = useContext(AuthContext);
   const { user, favMovies } = useContext(UserContext);
-  const [isPending, startTransition] = useTransition();
+  const [isFavorite, setIFavorite] = useState<boolean>(false);
   const addSnackBar = useSnackbar();
+
+  useEffect(() => {
+    setIFavorite(filterIsFavorite({ favMovies, movieId }));
+  }, []);
 
   const handleMakeAsFavorite = async () => {
     if (!isAuth) {
@@ -39,6 +42,7 @@ export const AddToFavorite = ({ movieId }: AddToFavoriteProps) => {
           session_id: session_id!,
           accountId: user.id
         });
+        setIFavorite(!isFavorite);
         addSnackBar({
           key: 'success',
           text: 'Success',
@@ -52,14 +56,13 @@ export const AddToFavorite = ({ movieId }: AddToFavoriteProps) => {
         });
       }
     }
-    router.refresh();
   };
 
 
   return (
     <span
       className='border-2 border-solid border-amber-500 rounded-full items-center p-1 cursor-pointer hover:scale-110'>
-      {isAuth ? filterIsFavorite({ favMovies, movieId }) ?
+      {isAuth ? isFavorite ?
           <HiHeart className='text-fuchsia-600' onClick={handleMakeAsFavorite} /> :
           <HiOutlineHeart onClick={handleMakeAsFavorite} />
         :

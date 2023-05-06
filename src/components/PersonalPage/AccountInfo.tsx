@@ -23,14 +23,16 @@ export const AccountInfo = ({ username, name, avatar, handleQuit }: AccountInfo)
 
       <div className='mt-4'>
         <ul>
-          <li className='flex items-center'>
-            <span className='text-xl mr-2'>Username:</span>
-            <h2 className='text-xl text-amber-500'>{username}</h2>
-          </li>
-          <li className='flex items-center'>
-            <span className='text-xl mr-2'>Name:</span>
-            <h2 className='text-xl text-amber-500'>{name}</h2>
-          </li>
+          {username &&
+            <li className='flex items-center'>
+              <span className='text-xl mr-2'>Username:</span>
+              <h2 className='text-xl text-amber-500'>{username}</h2>
+            </li>}
+          {name &&
+            <li className='flex items-center'>
+              <span className='text-xl mr-2'>Name:</span>
+              <h2 className='text-xl text-amber-500'>{name}</h2>
+            </li>}
         </ul>
       </div>
 
